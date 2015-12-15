@@ -9,21 +9,21 @@
 import Foundation
 
 var products = [
-    ("Kayak", "a boat for one person", 275.0, 4),
-    ("Lifejacket", "protective gear", 48.95, 14),
-    ("Soccer Ball", "fifa approved size and weight", 19.5, 32)
+    Product(name:"Kayak", description:"a boat for one person", price:275.0, stock:4),
+    Product(name:"Lifejacket", description:"protective gear", price:48.95, stock:14),
+    Product(name:"Soccer Ball", description:"fifa approved size and weight", price:19.5, stock:32)
 ]
 
-func calculateTax(product:(String, String, Double, Int)) -> Double {
-    return product.2 * 0.2
+func calculateTax(product:Product) -> Double {
+    return product.price * 0.2
 }
 
-func calculateStockValue (tuples:[(String, String, Double, Int)]) -> Double {
-    return tuples.reduce(0, combine: {(total, product) -> Double in
-        return total + (product.2 * Double(product.3))
+func calculateStockValue (productsArray:[Product]) -> Double {
+    return productsArray.reduce(0, combine: {(total, product) -> Double in
+        return total + product.stockValue
     })
 }
 
-print("sales tax for kayak: $\(calculateTax(products[0]))")
+print("sales tax for kayak: $\(products[0].calculateTax(0.2))")
 print("total value of stock: $\(calculateStockValue(products))")
 
